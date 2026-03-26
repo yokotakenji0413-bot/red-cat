@@ -1,165 +1,127 @@
-# 商品管理アプリ（確認テスト）
+# 🍎 商品管理アプリ（Laravel + Docker）
 
-## 概要
+## 📌 概要
 
-本アプリは、商品の登録・編集・削除・一覧表示を行うことができる商品管理システムです。
-Laravelを用いてCRUD機能を実装しています。
-
----
-
-## 機能一覧
-
-* 商品一覧表示
-* 商品検索機能（キーワード検索）
-* 商品登録機能
-* 商品編集機能
-* 商品削除機能
-* 商品画像表示機能
+Laravelで作成した商品管理アプリです。
+商品一覧・追加・編集・削除機能（CRUD）を実装しています。
 
 ---
 
-## 使用技術
+## 🚀 使用技術
 
-* PHP 8.1.12
-* Laravel 8.83.27
-* MySQL 8.0.34
-* HTML / CSS
-
----
-
-## ER図
-
-![ER図](./docs/er.png)
-
-※ products と seasons は多対多の関係であり、product_seasonテーブルで管理しています。
+- PHP 8.4
+- Laravel 13
+- MySQL 8.0
+- Docker / Docker Compose
+- Blade（テンプレート）
 
 ---
 
-## テーブル構成
-
-### products
-
-* id
-* name
-* price
-* image
-* description
-* created_at
-* updated_at
-
-### seasons
-
-* id
-* name
-
-### product_season
-
-* id
-* product_id
-* season_id
-
----
-
-## 環境構築
+## 🛠️ 環境構築方法
 
 ### ① リポジトリをクローン
 
-```bash
-git clone <リポジトリURL>
+```
+git clone https://github.com/yokotakenji0413-bot/red-cat
 cd red-cat
 ```
 
 ---
 
-### ② 依存関係インストール
+### ② Docker起動
 
-```bash
-composer install
+```
+docker compose up -d --build
 ```
 
 ---
 
-### ③ 環境ファイル作成
+### ③ マイグレーション実行
 
-```bash
-cp .env.example .env
+```
+docker compose exec app php artisan migrate
 ```
 
 ---
 
-### ④ アプリケーションキー生成
+### ④ Seeder実行（初期データ）
 
-```bash
-php artisan key:generate
+```
+docker compose exec app php artisan db:seed
 ```
 
 ---
 
-### ⑤ データベース設定（.env）
+### ⑤ ストレージリンク作成
 
-```env
-DB_DATABASE=データベース名
-DB_USERNAME=ユーザー名
-DB_PASSWORD=パスワード
+```
+docker compose exec app php artisan storage:link
 ```
 
 ---
 
-### ⑥ マイグレーション
+## 🌐 アクセスURL
 
-```bash
-php artisan migrate
-```
+<http://localhost:8000>
 
 ---
 
-### ⑦ サーバー起動
+## ✨ 主な機能
 
-```bash
-php artisan serve
-```
+### 📝 商品一覧
 
----
-
-### ⑧ アクセス
-
-```
-http://127.0.0.1:8000
-```
+* 商品名
+* 価格
+* 季節表示
+* 画像表示
 
 ---
 
-## 画像について
+### ➕ 商品追加
 
-商品画像は指定された画像素材を使用し、以下のディレクトリに配置しています。
-
-```
-public/images/
-```
-
-データベースには画像のファイル名のみを保存し、Bladeで以下のように表示しています。
-
-```blade
-<img src="{{ asset('images/' . $product->image) }}">
-```
+* 商品名・価格・説明・画像・季節を登録可能
 
 ---
 
-## 工夫した点
+### ✏️ 商品編集
 
-* 商品と季節を多対多で管理し、中間テーブルで柔軟に対応
-* 画像はpublicディレクトリで管理し、シンプルに表示
-* 新規登録・編集の両方で画像表示ができるよう実装
+* 登録済みデータの更新
 
 ---
 
-## 注意点
+### ❌ 商品削除
 
-* 画像アップロード機能ではなく、指定画像の表示機能を実装
-* 画像パスに「public」は含めず、asset関数を使用
+* ワンクリックで削除可能
 
 ---
 
-## 作者
+## 📷 画像について
 
-横田 憲治
+画像は以下のディレクトリに保存されています：
+
+storage/app/public/products
+
+例：
+
+- banana.png
+- orange.png
+- grapes.png
+- melon.png
+- kiwi.png
+
+画像は Laravel の storage:link により、以下のURLで表示されます：
+
+/storage/products/banana.png
+
+---
+
+## ⚠️ 注意点
+
+* `.env` ファイルは含まれていません
+* 初回は必ず `migrate` と `db:seed` を実行してください
+
+---
+
+## 👨‍💻 作成者
+
+横田憲治
