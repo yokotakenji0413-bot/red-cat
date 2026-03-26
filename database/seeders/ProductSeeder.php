@@ -10,35 +10,35 @@ class ProductSeeder extends Seeder
     public function run()
     {
         Product::create([
-            'name' => '春野菜セット',
+            'name' => 'バナナ',
             'price' => 1200,
-            'description' => '春の新鮮な野菜セットです',
+            'description' => '甘くて美味しいバナナです',
             'season' => json_encode(['春']),
-            'image' => null,
+            'image' => 'products/banana.png',
         ]);
 
         Product::create([
-            'name' => '夏フルーツ盛り',
+            'name' => 'オレンジ',
             'price' => 1800,
-            'description' => '夏にぴったりのフルーツです',
+            'description' => 'ジューシーなオレンジです',
             'season' => json_encode(['夏']),
-            'image' => null,
+            'image' => 'products/orange.png',
         ]);
 
         Product::create([
-            'name' => '秋の味覚セット',
+            'name' => 'ぶどう',
             'price' => 1500,
-            'description' => '秋の旬の食材を集めました',
+            'description' => '甘いぶどうです',
             'season' => json_encode(['秋']),
-            'image' => null,
+            'image' => 'products/grapes.png',
         ]);
 
         Product::create([
-            'name' => '冬あったか鍋セット',
+            'name' => 'メロン',
             'price' => 2000,
-            'description' => '冬にぴったりの鍋セットです',
+            'description' => '高級なメロンです',
             'season' => json_encode(['冬']),
-            'image' => null,
+            'image' => 'products/melon.png',
         ]);
     }
 }
